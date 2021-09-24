@@ -1,4 +1,4 @@
-> Created via `npm init svelte@next svelte-kit-pixi-sample` on 2021-09-24
+## This is a full example illustrating the use of [@mszu/pixi-ssr-shim](https://www.npmjs.com/package/@mszu/pixi-ssr-shim)
 
 This repository contains the default SvelteKit hello-world app with the
 `src/routes/index.svelte` component modified to include a PixiJS Application.

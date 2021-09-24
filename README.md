@@ -1,7 +1,26 @@
 ## This is a full example illustrating the use of [@mszu/pixi-ssr-shim](https://www.npmjs.com/package/@mszu/pixi-ssr-shim)
 
+![Screenshot showing SvelteKit demo app with PixiJS component](docs/screenshot.png "SvelteKit + PixiJS")
+
 This repository contains the default SvelteKit hello-world app with the
 `src/routes/index.svelte` component modified to include a PixiJS Application.
+
+Also note the addition to `svelte.config.js`:
+```javascript
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+  kit: {
+    // hydrate the <div id="svelte"> element in src/app.html
+    target: '#svelte',
+    vite: {                               // <--
+      optimizeDeps: {                     // <--
+        include: ['url', 'querystring']   // <-- This fixes "import not found: resolve" issues
+      }                                   // <-- stemming from @pixi/utils importing 'url'
+    }                                     // <--
+  }
+};
+export default config;
+```
 
 Run with `npm run dev` for the dev server, or `npm run build` then `npm run preview`
 for the production build preview.

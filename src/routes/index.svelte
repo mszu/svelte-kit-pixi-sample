@@ -10,6 +10,7 @@
 	import { TickerPlugin } from '@pixi/ticker';
 	import { Sprite } from '@pixi/sprite';
 	import { Texture } from '@pixi/core';
+	import { Text, TextStyle } from '@pixi/text';
 
 	// This initialization needs to only happen once, even when the component
 	// is unmounted and re-mounted
@@ -40,7 +41,21 @@
 		sprite.width = sprite.height = 100;
 		sprite.x = sprite.y = 100;
 
-		app.stage.addChild(sprite);
+		const text = new Text(
+			'PixiJS with SvelteKit!',
+			new TextStyle({
+				fontFamily: 'Helvetica',
+				fill: '#222',
+				fontWeight: '600',
+				fontSize: 48,
+				stroke: '#fff',
+				strokeThickness: 8,
+				lineJoin: 'round',
+			})
+		);
+		text.position.set(150, 150);
+
+		app.stage.addChild(sprite, text);
 
 		document.getElementById('content-div').appendChild(app.view);
 	});

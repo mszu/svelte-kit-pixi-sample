@@ -15,7 +15,7 @@
   "dependencies": {
     "@fontsource/fira-mono": "^4.5.0",
     "@lukeed/uuid": "^2.0.0",
-    "@mszu/pixi-ssr-shim": "^0.0.2",
+    "@mszu/pixi-ssr-shim": "^1.0.0",
     "cookie": "^0.4.1",
     "pixi.js": "^6.1.2"
   }

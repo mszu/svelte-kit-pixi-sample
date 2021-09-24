@@ -1,5 +1,15 @@
 > Created via `npm init svelte@next svelte-kit-pixi-sample` on 2021-09-24
+
+This repository contains the default SvelteKit hello-world app with the
+`src/routes/index.svelte` component modified to include a PixiJS Application.
+
+Run with `npm run dev` for the dev server, or `npm run build` then `npm run preview`
+for the production build preview.
+
+See original README below
+
 ----------------------------------------------------------
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);

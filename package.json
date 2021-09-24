@@ -1,6 +1,7 @@
 {
   "name": "svelte-kit-pixi-sample",
   "version": "0.0.1",
+  "private": true,
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
@@ -14,6 +15,8 @@
   "dependencies": {
     "@fontsource/fira-mono": "^4.5.0",
     "@lukeed/uuid": "^2.0.0",
-    "cookie": "^0.4.1"
+    "@mszu/pixi-ssr-shim": "^0.0.2",
+    "cookie": "^0.4.1",
+    "pixi.js": "^6.1.2"
   }
 }

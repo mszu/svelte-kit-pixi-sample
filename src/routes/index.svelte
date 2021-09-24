@@ -3,57 +3,67 @@
 </script>
 
 <script>
-	import Counter from '$lib/Counter.svelte';
+	import '@mszu/pixi-ssr-shim';
+	import { Application } from '@pixi/app';
+	import { BatchRenderer, Renderer } from '@pixi/core';
+	import { InteractionManager } from '@pixi/interaction';
+	import { TickerPlugin } from '@pixi/ticker';
+	import { Sprite } from '@pixi/sprite';
+	import { Texture } from '@pixi/core';
+
+	// This initialization needs to only happen once, even when the component
+	// is unmounted and re-mounted
+	if (!(Renderer.__plugins ?? {}).hasOwnProperty('interaction')) {
+		Renderer.registerPlugin('interaction', InteractionManager);
+	}
+	if (!(Renderer.__plugins ?? {}).hasOwnProperty('batch')) {
+		Renderer.registerPlugin('batch', BatchRenderer);
+	}
+	if (!(Application._plugins || []).some((plugin) => plugin === TickerPlugin)) {
+		Application.registerPlugin(TickerPlugin);
+	}
+
+	import { onMount } from 'svelte';
+		
+	let app;
+		
+	onMount(async () => {
+		app = new Application({
+			width: window.innerWidth,
+			height: window.innerHeight,
+			resolution: 1,
+			backgroundColor: 0x10bb99,
+		});
+
+		const sprite = new Sprite(Texture.WHITE);
+		sprite.tint = 0xff0000;
+		sprite.width = sprite.height = 100;
+		sprite.x = sprite.y = 100;
+
+		app.stage.addChild(sprite);
+
+		document.getElementById('content-div').appendChild(app.view);
+	});
 </script>
 
 <svelte:head>
 	<title>Home</title>
 </svelte:head>
 
-<section>
-	<h1>
-		<div class="welcome">
-			<picture>
-				<source srcset="svelte-welcome.webp" type="image/webp" />
-				<img src="svelte-welcome.png" alt="Welcome" />
-			</picture>
-		</div>
-
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/index.svelte</strong>
-	</h2>
-
-	<Counter />
-</section>
+<div id="content-div" class="content"></div>
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 1;
-	}
-
-	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
+	.content {
 		position: absolute;
 		width: 100%;
-		height: 100%;
 		top: 0;
-		display: block;
+		left: 0;
+		margin: 0;
+		z-index: 1;
+
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		flex: auto;
 	}
 </style>
